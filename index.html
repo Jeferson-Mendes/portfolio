@@ -1,0 +1,1682 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jeferson Mendes · Backend Developer</title>
+    <meta
+      name="description"
+      content="Jeferson Mendes — Desenvolvedor Back-End com 5+ anos em APIs, microsserviços e arquitetura orientada a eventos para fintech, proptech, apostas, saúde, agro e eventos. .NET, Node.js, NestJS, AWS."
+    />
+    <meta name="author" content="Jeferson Mendes" />
+    <meta property="og:title" content="Jeferson Mendes · Backend Developer" />
+    <meta
+      property="og:description"
+      content="Back-end para problemas complexos em fintech, proptech, apostas, saúde, agro e eventos. .NET · Node.js · NestJS · AWS."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#0b0f0e" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230b0f0e'/><text x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='700' font-size='30' fill='%2334d399'>jm</text></svg>"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f6f7f5;
+        --surface: #ffffff;
+        --surface-2: #eef1ee;
+        --text: #101412;
+        --muted: #5b6560;
+        --line: #dde2de;
+        --accent: #0f9f6e;
+        --accent-soft: rgba(15, 159, 110, 0.1);
+        --debit: #c2410c;
+        --credit: #0f9f6e;
+        --mono: "JetBrains Mono", ui-monospace, monospace;
+        --sans: "Space Grotesk", system-ui, sans-serif;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #0b0f0e;
+          --surface: #111715;
+          --surface-2: #161e1b;
+          --text: #e7ece9;
+          --muted: #8c9a93;
+          --line: #22302b;
+          --accent: #34d399;
+          --accent-soft: rgba(52, 211, 153, 0.1);
+          --debit: #fb923c;
+          --credit: #34d399;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #0b0f0e;
+        --surface: #111715;
+        --surface-2: #161e1b;
+        --text: #e7ece9;
+        --muted: #8c9a93;
+        --line: #22302b;
+        --accent: #34d399;
+        --accent-soft: rgba(52, 211, 153, 0.1);
+        --debit: #fb923c;
+        --credit: #34d399;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      a {
+        color: inherit;
+      }
+      .wrap {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+      @media (min-width: 720px) {
+        .wrap {
+          padding: 0 32px;
+        }
+      }
+
+      /* nav */
+      header.nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(10px);
+        background: color-mix(in srgb, var(--bg) 82%, transparent);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+        gap: 12px;
+      }
+      .logo {
+        font-family: var(--mono);
+        font-weight: 500;
+        text-decoration: none;
+        font-size: 15px;
+      }
+      .logo span {
+        color: var(--accent);
+      }
+      .nav nav {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+      }
+      .nav nav a {
+        font-size: 14px;
+        text-decoration: none;
+        color: var(--muted);
+        padding: 6px 10px;
+        border-radius: 8px;
+      }
+      .nav nav a:hover {
+        color: var(--text);
+        background: var(--surface-2);
+      }
+      .nav .links {
+        display: none;
+      }
+      @media (min-width: 720px) {
+        .nav .links {
+          display: flex;
+        }
+      }
+      .theme-btn {
+        border: 1px solid var(--line);
+        background: var(--surface);
+        color: var(--text);
+        border-radius: 8px;
+        width: 34px;
+        height: 34px;
+        cursor: pointer;
+        font-size: 15px;
+      }
+
+      /* hero */
+      .hero {
+        padding: 72px 0 56px;
+        display: grid;
+        gap: 40px;
+      }
+      @media (min-width: 900px) {
+        .hero {
+          grid-template-columns: 1.1fr 0.9fr;
+          align-items: center;
+          padding: 110px 0 90px;
+        }
+      }
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--muted);
+        border: 1px solid var(--line);
+        padding: 5px 12px;
+        border-radius: 99px;
+        background: var(--surface);
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 0 var(--accent);
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        70% {
+          box-shadow: 0 0 0 8px transparent;
+        }
+        100% {
+          box-shadow: 0 0 0 0 transparent;
+        }
+      }
+      h1 {
+        font-size: clamp(40px, 7vw, 68px);
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+        margin: 20px 0 18px;
+        font-weight: 700;
+      }
+      h1 em {
+        font-style: normal;
+        color: var(--accent);
+      }
+      .lede {
+        font-size: clamp(17px, 2vw, 19px);
+        color: var(--muted);
+        max-width: 540px;
+      }
+      .cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 28px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 11px 18px;
+        border-radius: 10px;
+        font-weight: 500;
+        font-size: 15px;
+        text-decoration: none;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        transition:
+          transform 0.15s,
+          border-color 0.15s;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        border-color: var(--accent);
+      }
+      .btn.primary {
+        background: var(--text);
+        color: var(--bg);
+        border-color: var(--text);
+      }
+      .btn svg {
+        width: 17px;
+        height: 17px;
+      }
+
+      /* ledger terminal */
+      .term {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        box-shadow: 0 20px 50px -30px rgba(0, 0, 0, 0.35);
+      }
+      .term-bar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--line);
+        background: var(--surface-2);
+        color: var(--muted);
+      }
+      .term-bar i {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--line);
+        display: block;
+      }
+      .term-bar span {
+        margin-left: 8px;
+        font-size: 12px;
+      }
+      .term-body {
+        padding: 14px 16px;
+        height: 268px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 3px;
+      }
+      .ev {
+        display: grid;
+        grid-template-columns: 62px 1fr auto;
+        gap: 10px;
+        white-space: nowrap;
+        animation: in 0.35s ease-out;
+      }
+      .ev .t {
+        color: var(--muted);
+      }
+      .ev .n {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .ev .dr {
+        color: var(--debit);
+      }
+      .ev .cr {
+        color: var(--credit);
+      }
+      .ev.sys .n {
+        color: var(--muted);
+      }
+      .balance {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 16px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .balance b {
+        color: var(--accent);
+        font-weight: 500;
+      }
+      @keyframes in {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* sections */
+      section {
+        padding: 64px 0;
+        border-top: 1px solid var(--line);
+      }
+      .label {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--accent);
+        letter-spacing: 0.04em;
+        margin-bottom: 10px;
+      }
+      h2 {
+        font-size: clamp(28px, 4vw, 38px);
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+        margin-bottom: 28px;
+        max-width: 720px;
+      }
+      .about {
+        display: grid;
+        gap: 32px;
+      }
+      @media (min-width: 860px) {
+        .about {
+          grid-template-columns: 1.3fr 1fr;
+        }
+      }
+      .about p {
+        color: var(--muted);
+        font-size: 17px;
+        margin-bottom: 14px;
+      }
+      .about p strong {
+        color: var(--text);
+        font-weight: 500;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        align-content: start;
+      }
+      .stat {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 18px;
+      }
+      .stat b {
+        display: block;
+        font-size: 30px;
+        letter-spacing: -0.02em;
+      }
+      .stat span {
+        font-size: 13.5px;
+        color: var(--muted);
+      }
+
+      /* focus cards */
+      .cards {
+        display: grid;
+        gap: 14px;
+      }
+      @media (min-width: 720px) {
+        .cards {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (min-width: 980px) {
+        .cards {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .intro {
+        color: var(--muted);
+        font-size: 17px;
+        max-width: 680px;
+        margin: -12px 0 28px;
+      }
+
+      /* domínios */
+      .domains {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      @media (min-width: 860px) {
+        .domains {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+      .dom {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 16px;
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+      }
+      .dom:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+      }
+      .dk {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--accent);
+        background: var(--accent-soft);
+        padding: 2px 8px;
+        border-radius: 5px;
+      }
+      .dom h4 {
+        font-size: 16px;
+        margin: 10px 0 4px;
+      }
+      .dom p {
+        font-size: 13.5px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      /* competências */
+      .skills {
+        display: grid;
+        gap: 12px;
+      }
+      @media (min-width: 640px) {
+        .skills {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (min-width: 980px) {
+        .skills {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .sk {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 20px;
+      }
+      .sk .ico {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        display: grid;
+        place-items: center;
+        margin-bottom: 12px;
+      }
+      .sk .ico svg {
+        width: 18px;
+        height: 18px;
+      }
+      .sk h4 {
+        font-size: 16.5px;
+        margin-bottom: 4px;
+        letter-spacing: -0.01em;
+      }
+      .sk p {
+        font-size: 14.5px;
+        color: var(--muted);
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 24px;
+        transition: border-color 0.2s;
+      }
+      .card:hover {
+        border-color: var(--accent);
+      }
+      .card .ico {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        display: grid;
+        place-items: center;
+        margin-bottom: 14px;
+      }
+      .card .ico svg {
+        width: 20px;
+        height: 20px;
+      }
+      .card h3 {
+        font-size: 19px;
+        margin-bottom: 6px;
+        letter-spacing: -0.01em;
+      }
+      .card p {
+        color: var(--muted);
+        font-size: 15px;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 14px;
+      }
+      .tag {
+        font-family: var(--mono);
+        font-size: 11.5px;
+        padding: 3px 9px;
+        border-radius: 6px;
+        background: var(--surface-2);
+        color: var(--muted);
+        border: 1px solid var(--line);
+      }
+
+      /* timeline */
+      .tl {
+        position: relative;
+        display: grid;
+        gap: 8px;
+      }
+      .job {
+        display: grid;
+        gap: 6px;
+        padding: 22px 0;
+        border-bottom: 1px dashed var(--line);
+      }
+      .job:last-child {
+        border-bottom: none;
+      }
+      @media (min-width: 760px) {
+        .job {
+          grid-template-columns: 200px 1fr;
+          gap: 28px;
+        }
+      }
+      .when {
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .when .now {
+        color: var(--accent);
+      }
+      .job h3 {
+        font-size: 19px;
+        letter-spacing: -0.01em;
+      }
+      .job h3 span {
+        color: var(--muted);
+        font-weight: 400;
+      }
+      .job .where {
+        font-size: 13.5px;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+      .job ul {
+        list-style: none;
+        display: grid;
+        gap: 6px;
+      }
+      .job li {
+        position: relative;
+        padding-left: 18px;
+        color: var(--muted);
+        font-size: 15.5px;
+      }
+      .job li::before {
+        content: "";
+        position: absolute;
+        left: 2px;
+        top: 10px;
+        width: 7px;
+        height: 7px;
+        border-radius: 2px;
+        background: var(--accent);
+        opacity: 0.7;
+      }
+
+      /* stack */
+      .stack {
+        display: grid;
+        gap: 12px;
+      }
+      @media (min-width: 720px) {
+        .stack {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .sgroup {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 18px;
+      }
+      .sgroup h4 {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--muted);
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .sgroup .tags {
+        margin-top: 0;
+      }
+      .sgroup .tag {
+        font-size: 12.5px;
+        color: var(--text);
+      }
+
+      /* principles */
+      .principles {
+        display: grid;
+        gap: 12px;
+      }
+      @media (min-width: 720px) {
+        .principles {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .pr {
+        padding: 20px;
+        border-left: 2px solid var(--accent);
+        background: var(--surface);
+        border-radius: 0 12px 12px 0;
+      }
+      .pr h4 {
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+      .pr p {
+        font-size: 14.5px;
+        color: var(--muted);
+      }
+
+      /* evolução */
+      .wip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--muted);
+        border: 1px dashed var(--line);
+        padding: 4px 11px;
+        border-radius: 99px;
+        margin: -12px 0 28px;
+      }
+      .wip .dot {
+        width: 7px;
+        height: 7px;
+        background: var(--debit);
+        animation: none;
+      }
+      .learn {
+        display: grid;
+        gap: 14px;
+      }
+      @media (min-width: 760px) {
+        .learn {
+          grid-template-columns: 1.4fr 1fr;
+        }
+      }
+      .learn .card .st {
+        font-family: var(--mono);
+        font-size: 11.5px;
+        color: var(--accent);
+        background: var(--accent-soft);
+        padding: 2px 8px;
+        border-radius: 5px;
+        display: inline-block;
+        margin-bottom: 10px;
+      }
+      .learn .soon {
+        border: 1px dashed var(--line);
+        border-radius: 14px;
+        padding: 24px;
+        display: grid;
+        align-content: center;
+        gap: 6px;
+        color: var(--muted);
+      }
+      .learn .soon h3 {
+        font-size: 17px;
+        color: var(--text);
+        letter-spacing: -0.01em;
+      }
+      .learn .soon p {
+        font-size: 14.5px;
+      }
+
+      /* contact */
+      .contact {
+        text-align: center;
+        padding: 90px 0;
+      }
+      .contact h2 {
+        margin: 0 auto 14px;
+      }
+      .contact p {
+        color: var(--muted);
+        max-width: 520px;
+        margin: 0 auto 28px;
+        font-size: 17px;
+      }
+      .contact .cta {
+        justify-content: center;
+      }
+      .mail {
+        font-family: var(--mono);
+        font-size: clamp(16px, 3vw, 22px);
+        color: var(--accent);
+        text-decoration: none;
+        border-bottom: 1px solid currentColor;
+        word-break: break-all;
+      }
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 24px 0;
+        color: var(--muted);
+        font-size: 13px;
+        font-family: var(--mono);
+      }
+      footer .wrap {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(14px);
+        transition:
+          opacity 0.6s,
+          transform 0.6s;
+      }
+      .reveal.on {
+        opacity: 1;
+        transform: none;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="nav">
+      <div class="wrap">
+        <a href="#top" class="logo">jeferson<span>.</span>mendes</a>
+        <nav>
+          <div class="links">
+            <a href="#sobre">Sobre</a>
+            <a href="#contextos">Contextos</a>
+            <a href="#competencias">Competências</a>
+            <a href="#experiencia">Experiência</a>
+            <a href="#stack">Stack</a>
+            <a href="#evolucao">Evolução</a>
+            <a href="#contato">Contato</a>
+          </div>
+          <button class="theme-btn" id="themeBtn" aria-label="Alternar tema">
+            ◐
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <div class="wrap">
+        <div class="hero">
+          <div>
+            <span class="status"
+              ><span class="dot"></span> Ceará, Brasil · remoto</span
+            >
+            <h1>Problemas complexos, <em>back-end confiável</em>.</h1>
+            <p class="lede">
+              Sou Jeferson Mendes, desenvolvedor back-end com mais de 5 anos
+              construindo APIs, microsserviços e plataformas orientadas a
+              eventos para fintech, proptech, apostas, saúde, agro e eventos.
+              Gosto de entender o problema a fundo antes de escrever a primeira
+              linha.
+            </p>
+            <div class="cta">
+              <a class="btn primary" href="#contato">Vamos conversar</a>
+              <a
+                class="btn"
+                href="https://github.com/jeferson-mendes"
+                target="_blank"
+                rel="noopener"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12C23.5 5.7 18.3.5 12 .5Z"
+                  />
+                </svg>
+                GitHub</a
+              >
+              <a
+                class="btn"
+                href="https://linkedin.com/in/jeferson-mendes"
+                target="_blank"
+                rel="noopener"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2ZM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2ZM7.1 20.5H3.5V9h3.6v11.5ZM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0Z"
+                  />
+                </svg>
+                LinkedIn</a
+              >
+            </div>
+          </div>
+
+          <div class="term" aria-hidden="true">
+            <div class="term-bar">
+              <i></i><i></i><i></i><span>event-bus — consumers</span>
+            </div>
+            <div class="term-body" id="feed"></div>
+            <div class="balance">
+              <span>eventos processados · falhas</span><b id="bal">0 · 0 ✓</b>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section id="sobre">
+        <div class="wrap about">
+          <div class="reveal">
+            <div class="label">// sobre</div>
+            <h2>Entender o negócio primeiro. O código vem depois.</h2>
+            <p>
+              Comecei numa <strong>software house</strong>, onde cada projeto
+              era um mundo novo: saúde, agronegócio, eventos. Isso me ensinou a
+              aprender domínios rápido, fazer as perguntas certas e transformar
+              regras de negócio confusas em sistemas claros.
+            </p>
+            <p>
+              Depois atuei numa <strong>proptech</strong>, mantendo e evoluindo
+              um monolito legado em C# / .NET que sustentava os dois principais
+              produtos da empresa, e hoje trabalho com
+              <strong>fintech e apostas</strong>: pagamentos com
+              ledger/double-entry, comunicação em tempo real e processamento
+              assíncrono em ambientes de alta demanda.
+            </p>
+            <p>
+              O que conecta tudo isso é a forma de trabalhar:
+              <strong>pensamento analítico</strong>, gosto por problemas
+              difíceis, colaboração em times ágeis e calma quando o sistema está
+              em produção e a pressão aperta. Uso
+              <strong>IA no dia a dia</strong> (Claude, GitHub Copilot) para
+              acelerar sem abrir mão de qualidade.
+            </p>
+          </div>
+          <div class="stats reveal">
+            <div class="stat"><b>5+</b><span>anos em back-end</span></div>
+            <div class="stat">
+              <b>7</b><span>domínios de negócio diferentes</span>
+            </div>
+            <div class="stat"><b>5</b><span>linguagens no currículo</span></div>
+            <div class="stat">
+              <b>IFCE</b><span>Bacharel em Sistemas de Informação</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contextos">
+        <div class="wrap">
+          <div class="label reveal">// contextos</div>
+          <h2 class="reveal">Um back-end que já passou por muitos negócios</h2>
+          <p class="intro reveal">
+            A passagem por software house, produto e startups me colocou em
+            domínios bem diferentes. Cada um tem suas regras, riscos e usuários,
+            e aprender rápido virou parte do trabalho.
+          </p>
+          <div class="domains">
+            <div class="dom reveal">
+              <span class="dk">fintech</span>
+              <h4>Pagamentos</h4>
+              <p>
+                Ledger double-entry, integrações com provedores e consistência
+                de transações.
+              </p>
+            </div>
+            <div class="dom reveal">
+              <span class="dk">apostas</span>
+              <h4>Plataforma de apostas</h4>
+              <p>Alta demanda, tempo real via Socket e baixa latência.</p>
+            </div>
+            <div class="dom reveal">
+              <span class="dk">proptech</span>
+              <h4>Imobiliário</h4>
+              <p>
+                CRM e CMS para o mercado imobiliário, com assinatura digital e
+                DNS.
+              </p>
+            </div>
+            <div class="dom reveal">
+              <span class="dk">saúde</span>
+              <h4>Saúde</h4>
+              <p>APIs para sistemas do setor de saúde.</p>
+            </div>
+            <div class="dom reveal">
+              <span class="dk">agro</span>
+              <h4>Agronegócio</h4>
+              <p>APIs, dashboards e sistemas analíticos para o campo.</p>
+            </div>
+            <div class="dom reveal">
+              <span class="dk">eventos</span>
+              <h4>Eventos</h4>
+              <p>Back-end para gestão e operação de eventos.</p>
+            </div>
+            <div class="dom reveal">
+              <span class="dk">pesquisa</span>
+              <h4>IoT</h4>
+              <p>Painel administrativo integrado a Arduino (PIBIC/IFCE).</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="competencias">
+        <div class="wrap">
+          <div class="label reveal">// como eu trabalho</div>
+          <h2 class="reveal">Competências que vão além do código</h2>
+          <div class="skills">
+            <div class="sk reveal">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 3v18h18" />
+                  <path d="m7 15 4-4 3 3 5-6" />
+                </svg>
+              </div>
+              <h4>Capacidade analítica</h4>
+              <p>
+                Leio dados, métricas e logs para entender o que está acontecendo
+                antes de propor a solução. Já construí dashboards e sistemas
+                analíticos.
+              </p>
+            </div>
+            <div class="sk reveal">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2Z"
+                  />
+                </svg>
+              </div>
+              <h4>Resolução de problemas complexos</h4>
+              <p>
+                Quebro problemas grandes em partes testáveis. Legado crítico,
+                integrações frágeis e bugs de produção não me assustam.
+              </p>
+            </div>
+            <div class="sk reveal">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="9" cy="7" r="4" />
+                  <path
+                    d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M16 3.1a4 4 0 0 1 0 7.8M21 21v-2a4 4 0 0 0-3-3.9"
+                  />
+                </svg>
+              </div>
+              <h4>Trabalho em equipe</h4>
+              <p>
+                Revisões de código, definição de padrões e troca constante com
+                produto e negócio. Bom código é o que o time inteiro consegue
+                manter.
+              </p>
+            </div>
+            <div class="sk reveal">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M21 12a9 9 0 1 1-3-6.7L21 8" />
+                  <path d="M21 3v5h-5" />
+                </svg>
+              </div>
+              <h4>Ambiente ágil</h4>
+              <p>
+                Ciclos curtos, entregas incrementais e melhoria contínua.
+                Prefiro feedback cedo a perfeição tardia.
+              </p>
+            </div>
+            <div class="sk reveal">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="13" r="8" />
+                  <path d="M12 9v4l2 2M9 2h6" />
+                </svg>
+              </div>
+              <h4>Trabalho sob pressão</h4>
+              <p>
+                Incidentes em produção, prazos de cliente e sistemas que
+                movimentam dinheiro. Mantenho a calma, priorizo e comunico com
+                clareza.
+              </p>
+            </div>
+            <div class="sk reveal">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"
+                  />
+                  <path
+                    d="M19 17l.8 2.2L22 20l-2.2.8L19 23l-.8-2.2L16 20l2.2-.8z"
+                  />
+                </svg>
+              </div>
+              <h4>IA aplicada ao desenvolvimento</h4>
+              <p>
+                Uso Claude e GitHub Copilot para explorar soluções, revisar e
+                acelerar entregas, sempre com senso crítico sobre o que vai para
+                produção.
+              </p>
+            </div>
+            <div class="sk reveal">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5"
+                  />
+                </svg>
+              </div>
+              <h4>Liderança técnica</h4>
+              <p>
+                Definição de padrões de arquitetura e condução de revisões
+                técnicas do time.
+              </p>
+            </div>
+            <div class="sk reveal">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                  />
+                </svg>
+              </div>
+              <h4>Comunicação com o negócio</h4>
+              <p>
+                Traduzo decisões técnicas para quem decide o produto, e regras
+                de negócio para código claro.
+              </p>
+            </div>
+            <div class="sk reveal">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"
+                  />
+                </svg>
+              </div>
+              <h4>Aprendizado contínuo</h4>
+              <p>
+                De Arduino a Kubernetes, de C# a NestJS: adapto rápido a novas
+                stacks e domínios.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="foco">
+        <div class="wrap">
+          <div class="label reveal">// técnico</div>
+          <h2 class="reveal">Onde eu entrego mais valor</h2>
+          <div class="cards">
+            <article class="card reveal">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />
+                </svg>
+              </div>
+              <h3>APIs & microsserviços</h3>
+              <p>
+                APIs para múltiplos setores, integrações com serviços externos e
+                arquitetura limpa, com TDD, SOLID e padrões de projeto.
+              </p>
+              <div class="tags">
+                <span class="tag">NestJS</span><span class="tag">Express</span
+                ><span class="tag">FastAPI</span
+                ><span class="tag">Clean Arch</span>
+              </div>
+            </article>
+            <article class="card reveal">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="5" width="20" height="14" rx="2" />
+                  <path d="M2 10h20M6 15h4" />
+                </svg>
+              </div>
+              <h3>Pagamentos & ledger</h3>
+              <p>
+                Fluxos de double-entry, integrações com provedores de pagamento
+                e modelagem de dados transacionais pensada para consistência e
+                auditoria.
+              </p>
+              <div class="tags">
+                <span class="tag">double-entry</span
+                ><span class="tag">PostgreSQL</span
+                ><span class="tag">idempotência</span>
+              </div>
+            </article>
+            <article class="card reveal">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M4 12h4l3-8 4 16 3-8h2" />
+                </svg>
+              </div>
+              <h3>Arquitetura orientada a eventos</h3>
+              <p>
+                Filas e mensageria para desacoplar serviços e manter processos
+                críticos confiáveis mesmo quando algo do outro lado falha.
+              </p>
+              <div class="tags">
+                <span class="tag">RabbitMQ</span><span class="tag">BullMQ</span
+                ><span class="tag">SNS/SQS</span
+                ><span class="tag">WebSocket</span>
+              </div>
+            </article>
+            <article class="card reveal">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9l-3.8 3.8Z"
+                  />
+                </svg>
+              </div>
+              <h3>Legado .NET sem medo</h3>
+              <p>
+                Manutenção e evolução de monolitos em C# / .NET com
+                funcionalidades críticas, reduzindo risco em ambientes de alta
+                complexidade.
+              </p>
+              <div class="tags">
+                <span class="tag">C#</span><span class="tag">.NET</span
+                ><span class="tag">SQL Server</span
+                ><span class="tag">Clean Arch</span>
+              </div>
+            </article>
+            <article class="card reveal">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M18 10h-1.3A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10Z" />
+                </svg>
+              </div>
+              <h3>Cloud, infra & observabilidade</h3>
+              <p>
+                Deploy e operação em AWS, containers com Docker e Kubernetes,
+                infraestrutura como código e troubleshooting em produção.
+              </p>
+              <div class="tags">
+                <span class="tag">AWS</span><span class="tag">Kubernetes</span
+                ><span class="tag">Terraform</span
+                ><span class="tag">Datadog</span>
+              </div>
+            </article>
+            <article class="card reveal">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M13 2 3 14h9l-1 8 10-12h-9z" />
+                </svg>
+              </div>
+              <h3>Tempo real & alta demanda</h3>
+              <p>
+                Comunicação via Socket e CDN para cenários de muitos acessos
+                simultâneos e baixa latência.
+              </p>
+              <div class="tags">
+                <span class="tag">WebSocket</span><span class="tag">CDN</span
+                ><span class="tag">filas</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="experiencia">
+        <div class="wrap">
+          <div class="label reveal">// experiência</div>
+          <h2 class="reveal">Por onde passei</h2>
+          <div class="tl">
+            <div class="job reveal">
+              <div class="when">01/2025 — <span class="now">atual</span></div>
+              <div>
+                <h3>Engenheiro de Software <span>· Octus Hub</span></h3>
+                <div class="where">Goiânia, GO · Remoto</div>
+                <ul>
+                  <li>
+                    Desenvolvimento de sistemas de pagamento, responsável por
+                    fluxos de ledger/double-entry com consistência e
+                    rastreabilidade das transações.
+                  </li>
+                  <li>
+                    Modelagem e persistência de dados transacionais em
+                    PostgreSQL.
+                  </li>
+                  <li>
+                    Filas para comunicação assíncrona entre serviços em
+                    processos críticos de negócio.
+                  </li>
+                  <li>Deploy e operação de aplicações na AWS.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="job reveal">
+              <div class="when">10/2024 — <span class="now">atual</span></div>
+              <div>
+                <h3>
+                  Desenvolvedor de Software <span>· MYCLOSE Community</span>
+                </h3>
+                <div class="where">Goiânia, GO · Remoto</div>
+                <ul>
+                  <li>Integrações com sistemas de pagamento.</li>
+                  <li>
+                    PostgreSQL e filas para processamento assíncrono e
+                    desacoplamento entre serviços.
+                  </li>
+                  <li>
+                    Infraestrutura AWS, incluindo configuração de CDN para
+                    distribuição de conteúdo.
+                  </li>
+                  <li>
+                    Comunicação em tempo real via Socket para cenários de alta
+                    demanda e baixa latência.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="job reveal">
+              <div class="when">10/2022 — 02/2024</div>
+              <div>
+                <h3>Desenvolvedor Back-End <span>· Kenlo</span></h3>
+                <div class="where">Campinas, SP</div>
+                <ul>
+                  <li>
+                    Manutenção e novas funcionalidades nos dois principais
+                    produtos da empresa (CRM e CMS).
+                  </li>
+                  <li>
+                    Evolução de funcionalidades críticas em monolito legado C# /
+                    .NET.
+                  </li>
+                  <li>
+                    Mensageria com AWS SNS e SQS; PostgreSQL e SQL Server.
+                  </li>
+                  <li>Integrações com Go Cache, PowerDNS e Clicksign.</li>
+                  <li>
+                    Docker, Kubernetes, Terraform e observabilidade com Datadog.
+                  </li>
+                  <li>
+                    Arquitetura Limpa, TDD, SOLID e padrões de projeto;
+                    dashboards e landing pages no CMS.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="job reveal">
+              <div class="when">01/2021 — 10/2022</div>
+              <div>
+                <h3>
+                  Desenvolvedor Back-End <span>· Paguru Soluções Digitais</span>
+                </h3>
+                <div class="where">Juazeiro do Norte, CE · Software house</div>
+                <ul>
+                  <li>
+                    Projetos para clientes de diferentes setores, com
+                    levantamento de regras de negócio e entregas em ciclos
+                    curtos.
+                  </li>
+                  <li>CRM, CMS, dashboards e sistemas analíticos.</li>
+                  <li>APIs para saúde, eventos e agronegócio.</li>
+                  <li>
+                    Integrações complexas com serviços externos, incluindo
+                    pagamentos.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="job reveal">
+              <div class="when">01/2020 — 12/2020</div>
+              <div>
+                <h3>
+                  Pesquisador Voluntário & Dev Web
+                  <span>· IFCE Crato (PIBIC)</span>
+                </h3>
+                <div class="where">Crato, CE</div>
+                <ul>
+                  <li>Painel administrativo integrado a Arduino e IoT.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="stack">
+        <div class="wrap">
+          <div class="label reveal">// stack</div>
+          <h2 class="reveal">Ferramentas do dia a dia</h2>
+          <div class="stack">
+            <div class="sgroup reveal">
+              <h4>Linguagens</h4>
+              <div class="tags">
+                <span class="tag">TypeScript</span
+                ><span class="tag">JavaScript</span
+                ><span class="tag">C# / .NET</span
+                ><span class="tag">Python</span><span class="tag">Java</span>
+              </div>
+            </div>
+            <div class="sgroup reveal">
+              <h4>Frameworks</h4>
+              <div class="tags">
+                <span class="tag">NestJS</span
+                ><span class="tag">Express.js</span
+                ><span class="tag">FastAPI</span
+                ><span class="tag">React.js</span>
+              </div>
+            </div>
+            <div class="sgroup reveal">
+              <h4>Dados</h4>
+              <div class="tags">
+                <span class="tag">PostgreSQL</span
+                ><span class="tag">SQL Server</span
+                ><span class="tag">MongoDB</span>
+              </div>
+            </div>
+            <div class="sgroup reveal">
+              <h4>Mensageria</h4>
+              <div class="tags">
+                <span class="tag">RabbitMQ</span><span class="tag">BullMQ</span
+                ><span class="tag">SQS</span><span class="tag">SNS</span>
+              </div>
+            </div>
+            <div class="sgroup reveal">
+              <h4>Cloud & DevOps</h4>
+              <div class="tags">
+                <span class="tag">AWS (EC2, S3, SQS, SES)</span
+                ><span class="tag">Docker</span
+                ><span class="tag">Kubernetes</span
+                ><span class="tag">Terraform</span
+                ><span class="tag">GitHub Actions</span
+                ><span class="tag">GitLab CI</span>
+              </div>
+            </div>
+            <div class="sgroup reveal">
+              <h4>Observabilidade & IA</h4>
+              <div class="tags">
+                <span class="tag">New Relic</span
+                ><span class="tag">Datadog</span
+                ><span class="tag">GitHub Copilot</span
+                ><span class="tag">Claude</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="evolucao">
+        <div class="wrap">
+          <div class="label reveal">// evolução</div>
+          <h2 class="reveal">O que estou aprendendo agora</h2>
+          <span class="wip reveal"
+            ><span class="dot"></span> seção em desenvolvimento</span
+          >
+          <p class="intro reveal">
+            Cursos, estudos e interesses que estão moldando os meus próximos
+            passos como engenheiro de software.
+          </p>
+          <div class="learn">
+            <article class="card reveal">
+              <span class="st">interesse atual</span>
+              <h3>Go</h3>
+              <p>
+                Simplicidade, concorrência nativa com goroutines e channels e
+                binários leves. Uma linguagem que conversa direto com o que já
+                faço: microsserviços, filas e sistemas de alta demanda.
+              </p>
+              <div class="tags">
+                <span class="tag">goroutines</span
+                ><span class="tag">channels</span
+                ><span class="tag">microsserviços</span
+                ><span class="tag">performance</span>
+              </div>
+            </article>
+            <div class="soon reveal">
+              <h3>Cursos & certificações</h3>
+              <p>Em breve: trilhas e cursos que concluí e estou cursando.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contato" class="contact">
+        <div class="wrap reveal">
+          <div class="label">// contato</div>
+          <h2>Tem um problema difícil pra resolver?</h2>
+          <p>
+            Estou aberto a conversar sobre oportunidades em back-end,
+            microsserviços e arquitetura orientada a eventos, em qualquer
+            domínio.
+          </p>
+          <a class="mail" href="mailto:jefersonmendesdev@gmail.com"
+            >jefersonmendesdev@gmail.com</a
+          >
+          <div class="cta" style="margin-top: 28px">
+            <a
+              class="btn"
+              href="https://linkedin.com/in/jeferson-mendes"
+              target="_blank"
+              rel="noopener"
+              >LinkedIn</a
+            >
+            <a
+              class="btn"
+              href="https://github.com/jeferson-mendes"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <span>© <span id="yr"></span> Jeferson Mendes</span>
+        <span>Português nativo · Inglês intermediário</span>
+      </div>
+    </footer>
+
+    <script>
+      // tema
+      (function () {
+        const root = document.documentElement,
+          btn = document.getElementById("themeBtn");
+        let saved = null;
+        try {
+          saved = localStorage.getItem("theme");
+        } catch (e) {}
+        if (saved) root.setAttribute("data-theme", saved);
+        btn.addEventListener("click", () => {
+          const cur =
+            root.getAttribute("data-theme") ||
+            (matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light");
+          const next = cur === "dark" ? "light" : "dark";
+          root.setAttribute("data-theme", next);
+          try {
+            localStorage.setItem("theme", next);
+          } catch (e) {}
+        });
+        document.getElementById("yr").textContent = new Date().getFullYear();
+      })();
+
+      // reveal on scroll
+      (function () {
+        const els = document.querySelectorAll(".reveal");
+        if (!("IntersectionObserver" in window)) {
+          els.forEach((e) => e.classList.add("on"));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (es) =>
+            es.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("on");
+                io.unobserve(e.target);
+              }
+            }),
+          { threshold: 0.12 },
+        );
+        els.forEach((e) => io.observe(e));
+      })();
+
+      // feed de eventos de vários domínios (mostra a variedade de contextos)
+      (function () {
+        const feed = document.getElementById("feed"),
+          bal = document.getElementById("bal");
+        const evs = [
+          ["payment.settled", "fintech"],
+          ["ledger.entry.balanced", "fintech"],
+          ["property.listing.published", "proptech"],
+          ["contract.signed", "proptech"],
+          ["bet.placed", "apostas"],
+          ["odds.updated", "apostas"],
+          ["appointment.scheduled", "saúde"],
+          ["harvest.report.generated", "agro"],
+          ["ticket.issued", "eventos"],
+          ["socket.broadcast", "realtime"],
+        ];
+        const sys = [
+          "queue.ack ✓",
+          "retry 1/3 → ok",
+          "idempotency-key hit",
+          "dlq empty ✓",
+          "webhook.delivered 200",
+        ];
+        const MAX = 11;
+        let n = 0,
+          ok = 0;
+        function ts() {
+          return new Date().toTimeString().slice(0, 8);
+        }
+        function push(cls, name, tag, kind) {
+          const row = document.createElement("div");
+          row.className = "ev" + (cls ? " " + cls : "");
+          row.innerHTML = `<span class="t">${ts()}</span><span class="n">${name}</span><span class="${kind || ""}">${tag || ""}</span>`;
+          feed.appendChild(row);
+          while (feed.children.length > MAX) feed.removeChild(feed.firstChild);
+        }
+        function tick() {
+          n++;
+          if (n % 4 === 0) {
+            push("sys", sys[Math.floor(Math.random() * sys.length)]);
+            return;
+          }
+          const [e, d] = evs[Math.floor(Math.random() * evs.length)];
+          ok++;
+          push("", e, d, "cr");
+          bal.textContent = ok.toLocaleString("pt-BR") + " · 0 ✓";
+        }
+        for (let i = 0; i < 9; i++) tick();
+        if (!matchMedia("(prefers-reduced-motion: reduce)").matches)
+          setInterval(tick, 1300);
+      })();
+    </script>
+  </body>
+</html>

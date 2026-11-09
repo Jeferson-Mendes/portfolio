@@ -166,7 +166,7 @@
       .nav .links {
         display: none;
       }
-      @media (min-width: 720px) {
+      @media (min-width: 900px) {
         .nav .links {
           display: flex;
         }
@@ -640,6 +640,77 @@
         opacity: 0.7;
       }
 
+      /* projetos */
+      .project {
+        display: grid;
+        gap: 28px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 24px;
+        transition: border-color 0.2s;
+      }
+      .project:hover {
+        border-color: var(--accent);
+      }
+      @media (min-width: 860px) {
+        .project {
+          grid-template-columns: 1.15fr 1fr;
+          gap: 40px;
+          padding: 32px;
+        }
+      }
+      .project h3 {
+        font-size: clamp(26px, 3.4vw, 32px);
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+        margin: 12px 0 8px;
+      }
+      .project p {
+        color: var(--muted);
+        font-size: 16px;
+      }
+      .project .segments {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .project .cta {
+        margin-top: 22px;
+      }
+      .project h4 {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--muted);
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .project ul {
+        list-style: none;
+        display: grid;
+        gap: 10px;
+      }
+      .project li {
+        position: relative;
+        padding-left: 18px;
+        color: var(--muted);
+        font-size: 15px;
+      }
+      .project li::before {
+        content: "";
+        position: absolute;
+        left: 2px;
+        top: 10px;
+        width: 7px;
+        height: 7px;
+        border-radius: 2px;
+        background: var(--accent);
+        opacity: 0.7;
+      }
+
       /* stack */
       .stack {
         display: grid;
@@ -826,6 +897,7 @@
             <a href="#contextos">Contextos</a>
             <a href="#competencias">Competências</a>
             <a href="#experiencia">Experiência</a>
+            <a href="#projetos">Projetos</a>
             <a href="#stack">Stack</a>
             <a href="#evolucao">Evolução</a>
             <a href="#contato">Contato</a>
@@ -1467,6 +1539,74 @@
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section id="projetos">
+        <div class="wrap">
+          <div class="label reveal">// projetos pessoais</div>
+          <h2 class="reveal">Do código ao produto no ar</h2>
+          <p class="intro reveal">
+            Projetos próprios, em que a decisão técnica anda junto com a de
+            produto.
+          </p>
+          <article class="project reveal">
+            <div>
+              <span class="dk">gestão · SaaS</span>
+              <h3>Eloante</h3>
+              <p>
+                Sistema de gestão para negócios de atendimento: agenda,
+                prontuário, financeiro, CRM por WhatsApp e agendamento online em
+                um só lugar.
+              </p>
+              <div class="segments">
+                <span class="dk">veterinária</span
+                ><span class="dk">barbearia</span
+                ><span class="dk">odontologia</span
+                ><span class="dk">fisioterapia</span>
+              </div>
+              <div class="tags">
+                <span class="tag">Go</span><span class="tag">React</span
+                ><span class="tag">TypeScript</span
+                ><span class="tag">PostgreSQL</span
+                ><span class="tag">Docker</span>
+              </div>
+              <div class="cta">
+                <a
+                  class="btn primary"
+                  href="https://eloante.com.br/"
+                  target="_blank"
+                  rel="noopener"
+                  >Conhecer o Eloante ↗</a
+                >
+              </div>
+            </div>
+            <div>
+              <h4>Destaques</h4>
+              <ul>
+                <li>
+                  Uma plataforma para quatro segmentos, com os módulos liberados
+                  conforme o tipo de negócio.
+                </li>
+                <li>
+                  Dados isolados por cliente, perfis de acesso, auditoria e
+                  proteção de dados de saúde conforme a LGPD.
+                </li>
+                <li>
+                  CRM por WhatsApp com funil, etiquetas e conversas atualizadas
+                  em tempo real.
+                </li>
+                <li>
+                  Agendamento online por link público, com aviso automático ao
+                  cliente.
+                </li>
+                <li>
+                  IA de apoio ao diagnóstico, com auditoria e avaliação do
+                  profissional.
+                </li>
+              </ul>
+            </div>
+          </article>
         </div>
       </section>
 
